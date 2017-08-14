@@ -2,10 +2,8 @@
   "name": "antd-admin-api",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "dev": "set BROWSER=none&&set HOST=0.0.0.0&&set PORT=8088&&roadhog server"
-  },
   "dependencies": {
-    "roadhog": "^1.1.1"
+    "mockjs": "^1.0.1-beta3",
+    "roadhog": "^1.0.0-beta.7"
   }
 }

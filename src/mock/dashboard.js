@@ -1,4 +1,4 @@
-import { color } from '../utils/theme'
+const { color } = require('../utils/theme')
 
 const Mock = require('mockjs')
 const config = require('../utils/config')
