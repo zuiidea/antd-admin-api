@@ -2,7 +2,7 @@ import { Mock, Constant, qs, randomAvatar } from './_utils'
 
 const { ApiPrefix } = Constant
 
-let usersListData = Mock.mock({
+const generateData = () => Mock.mock({
   'data|80-100': [
     {
       id: '@id',
@@ -19,9 +19,10 @@ let usersListData = Mock.mock({
       },
     },
   ],
-})
+}).data
 
-let database = usersListData.data
+
+let database = generateData()
 
 const EnumRoleType = {
   ADMIN: 'admin',
@@ -184,6 +185,11 @@ module.exports = {
   [`POST ${ApiPrefix}/users/delete`](req, res) {
     const { ids } = req.body
     database = database.filter(item => !ids.some(_ => _ === item.id))
+    
+    if(database.length === 0) {
+      database = generateData()
+    }
+
     res.status(204).end()
   },
 
@@ -221,6 +227,11 @@ module.exports = {
     const data = queryArray(database, id, 'id')
     if (data) {
       database = database.filter(item => item.id !== id)
+
+      if(database.length === 0) {
+        database = generateData()
+      }
+
       res.status(204).end()
     } else {
       res.status(404).json(NOTFOUND)
